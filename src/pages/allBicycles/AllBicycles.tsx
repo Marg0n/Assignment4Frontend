@@ -35,20 +35,20 @@ const AllBicycles = () => {
     ? products?.filter((product: ItemData) => {
         const matchSearch =
           !filters.search ||
-          product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-          product.brand.toLowerCase().includes(filters.search.toLowerCase());
+          product.name?.toLowerCase().includes(filters.search.toLowerCase()) ||
+          product.brand?.toLowerCase().includes(filters.search.toLowerCase());
 
         const matchPrice =
-          product.price >= filters.priceRange[0] &&
-          product.price <= filters.priceRange[1];
+          product?.price && product?.price >= filters.priceRange[0] &&
+          product?.price <= filters.priceRange[1];
 
         const matchType =
           !filters.type ||
-          product.type.toLowerCase() === filters.type.toLowerCase();
+          product?.type?.toLowerCase() === filters.type.toLowerCase();
 
         const matchBrand =
           !filters.brand ||
-          product.brand.toLowerCase() === filters.brand.toLowerCase();
+          product?.brand?.toLowerCase() === filters.brand.toLowerCase();
 
         const matchAvailability = filters.availability
           ? product.inStock === true
@@ -122,8 +122,8 @@ const AllBicycles = () => {
         <div className="hidden lg:block lg:col-span-1">
           <AllBicycleFilter
             handleChange={handleFilterChange}
-            brandOptions={brands}
-            typeOptions={types}
+            brandOptions={brands as string[]}
+            typeOptions={types as string[]}
           />
         </div>
       </div>
@@ -137,8 +137,8 @@ const AllBicycles = () => {
       >
         <AllBicycleFilter
           handleChange={handleFilterChange}
-          brandOptions={brands}
-          typeOptions={types}
+          brandOptions={brands as string[]}
+          typeOptions={types as string[]}
         />
       </Drawer>
     </div>
