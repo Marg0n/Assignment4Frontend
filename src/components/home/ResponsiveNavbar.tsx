@@ -134,6 +134,12 @@ const ResponsiveNavbar = () => {
         </NavLink>
       </li>
 
+      <li className="transition-all duration-500 cursor-pointer hover:text-white capitalize">
+        <NavLink to="/showroom" className={activeLinkForNavbar}>
+          Showroom
+        </NavLink>
+      </li>
+
       <li className="transition-all duration-500 cursor-pointer dark:text-[#abc2d3] hover:text-white capitalize flex items-center gap-[3px] group relative">
         Terms & Conditions
         <MdKeyboardArrowDown className="text-[1.5rem] text-black group-hover:text-white transition-all duration-500 group-hover:rotate-[180deg]" />
@@ -177,6 +183,14 @@ const ResponsiveNavbar = () => {
         <NavLink to="/about" className={activeLink}>
           <span className="hover:text-[#3B9DF8] transition-all duration-300  text-white">
             About Us
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="capitalize cursor-pointer">
+        <NavLink to="/showroom" className={activeLink}>
+          <span className="hover:text-[#3B9DF8] transition-all duration-300  text-white">
+            Showroom
           </span>
         </NavLink>
       </li>

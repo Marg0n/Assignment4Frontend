@@ -22,6 +22,7 @@ import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import SuccessOrder from "@/pages/successOrder/SuccessOrder";
 import FailedOrder from "@/pages/failedOrder/FailedOrder";
+import FindShowroomPage from "@/pages/showroom/FindShowroomPage";
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const routes = createBrowserRouter([
       {
         path: "about",
         element: <AboutusLayout />,
+      },
+      {
+        path: "showroom",
+        element: <FindShowroomPage />,
       },
       {
         path: "successfull-order",
