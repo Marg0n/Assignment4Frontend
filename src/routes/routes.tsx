@@ -23,6 +23,7 @@ import { userPaths } from "./user.routes";
 import SuccessOrder from "@/pages/successOrder/SuccessOrder";
 import FailedOrder from "@/pages/failedOrder/FailedOrder";
 import FindShowroomPage from "@/pages/showroom/FindShowroomPage";
+import ShowroomLayout from "@/layout/Showroom/ShowroomLayout";
 
 const routes = createBrowserRouter([
   {
@@ -45,7 +46,13 @@ const routes = createBrowserRouter([
       },
       {
         path: "showroom",
-        element: <FindShowroomPage />,
+        element: <ShowroomLayout />,
+        children:[
+          {
+            index: true,
+            element: <FindShowroomPage/>,
+          }
+        ]
       },
       {
         path: "successfull-order",
