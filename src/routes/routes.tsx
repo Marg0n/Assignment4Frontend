@@ -70,7 +70,7 @@ const routes = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Checkout />,
+            element: <ProtectedRoute role="customer"><Checkout /></ProtectedRoute>,
           },
         ],
       },

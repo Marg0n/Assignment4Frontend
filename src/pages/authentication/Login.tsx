@@ -9,7 +9,13 @@ import {
 import { Checkbox, Flex, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { toast } from "sonner";
 import logo from "../../assets/images/logo/logo.png";
 import { useLoginMutation } from "../../redux/api/authApi";
@@ -23,6 +29,9 @@ const Login = () => {
 
   //* navigation
   const navigate = useNavigate();
+
+  //* location to navigate
+  const location = useLocation();
 
   //* useAppDispatch hook
   const dispatch = useAppDispatch();
@@ -54,7 +63,7 @@ const Login = () => {
           setUser({
             user: res?.data as TUserFromToken,
             token: res?.token,
-          }),
+          })
         );
 
         //! Persist token based on "remember me"
@@ -73,7 +82,9 @@ const Login = () => {
           duration: 2000,
         });
 
-        navigate("/");
+        // navigate("/");
+        const redirectTo = location.state?.from?.pathname || "/";
+        navigate(redirectTo, { replace: true });
       } else {
         toast.error("Failed to verify", { id: toastId });
         return <Navigate to="/login" replace={true} />;

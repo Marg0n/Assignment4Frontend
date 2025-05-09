@@ -60,6 +60,7 @@ export interface TUser {
     city?: string;
     state?: string;
     zipCode?: string;
+    isDeleted?: boolean;
   };
 }
 
