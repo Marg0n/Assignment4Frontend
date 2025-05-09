@@ -25,6 +25,21 @@ export interface ItemData {
   updatedAt?: string | Date;
   rating?: number;
   isDeleted?: boolean;
+  role?: "admin" | "customer";
+  status?: "active" | "inactive";
+  needsPasswordChange?: boolean;
+  passwordChangedAt?: Date;
+  image?: string;
+  address?: string;
+  phone?: string;
+  bloodGroup?: string;
+  emergencyContact?: string;
+  gender?: "male" | "female";
+  dateOfBirth?: Date;
+  country?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
 }
 
 export interface ItemsCardProps {
