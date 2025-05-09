@@ -361,16 +361,6 @@ const AdminDashboardLandingpage = () => {
     "createdAt",
     "totalPrice",
   );
-  const usersTrendData = prepareTrendData(
-    usersData?.data || [],
-    "createdAt",
-    "1",
-  );
-  const productsTrendData = prepareTrendData(
-    productsData?.data?.result || [],
-    "createdAt",
-    "1",
-  );
 
   return (
     <div className="px-6 space-y-6 w-full h-screen">

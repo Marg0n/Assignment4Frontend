@@ -64,7 +64,6 @@ const ResponsiveNavbar = () => {
   //* user role leading dashboard
   const toDashboard = user ? `/dashboard/${user?.role}/my-dashboard` : "/";
 
-
   //* NavLink is active
   const activeLink = ({ isActive }: { isActive: boolean }) => {
     return isActive
@@ -134,6 +133,12 @@ const ResponsiveNavbar = () => {
         </NavLink>
       </li>
 
+      <li className="transition-all duration-500 cursor-pointer hover:text-white capitalize">
+        <NavLink to="/showroom" className={activeLinkForNavbar}>
+          Showroom
+        </NavLink>
+      </li>
+
       <li className="transition-all duration-500 cursor-pointer dark:text-[#abc2d3] hover:text-white capitalize flex items-center gap-[3px] group relative">
         Terms & Conditions
         <MdKeyboardArrowDown className="text-[1.5rem] text-black group-hover:text-white transition-all duration-500 group-hover:rotate-[180deg]" />
@@ -177,6 +182,14 @@ const ResponsiveNavbar = () => {
         <NavLink to="/about" className={activeLink}>
           <span className="hover:text-[#3B9DF8] transition-all duration-300  text-white">
             About Us
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="capitalize cursor-pointer">
+        <NavLink to="/showroom" className={activeLink}>
+          <span className="hover:text-[#3B9DF8] transition-all duration-300  text-white">
+            Showroom
           </span>
         </NavLink>
       </li>
@@ -226,12 +239,19 @@ const ResponsiveNavbar = () => {
             {data?.data?.name || data?.data?.email}
           </h1>
 
-          <div
+          {/* <div
             className={`${
               accountMenuOpen
                 ? "translate-y-0 opacity-100 z-[1]"
                 : "translate-y-[10px] opacity-0 z-[-1]"
             } bg-white w-max rounded-md absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] shadow-lg z-50 shadow-purple-600`}
+          > */}
+          <div
+            className={`absolute top-[45px] right-0 w-max rounded-md p-[10px] flex flex-col gap-[5px] shadow-lg shadow-purple-600 bg-white transition-all duration-300 ${
+              accountMenuOpen
+                ? "opacity-100 translate-y-0 pointer-events-auto z-50"
+                : "opacity-0 translate-y-2 pointer-events-none z-[-1]"
+            }`}
           >
             <span className="px-4 py-1.5 bg-[#e4d4f4] text-[#7828c8] rounded-full text-[0.9rem] font-[500] flex items-center gap-2">
               {user.role === "admin" ? (

@@ -18,6 +18,11 @@ const AllBicycles = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
 
+  //* for filter
+  const { data: filterData } = useGetAllProductsQuery({ page: 1, limit: 1000 });
+  const filterProducts = filterData?.data?.result;
+
+  //* for pagination
   const { data, isLoading, isError } = useGetAllProductsQuery({ page, limit });
   const meta = data?.data?.meta;
   const products = data?.data?.result;
@@ -35,23 +40,23 @@ const AllBicycles = () => {
     ? products?.filter((product: ItemData) => {
         const matchSearch =
           !filters.search ||
-          product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-          product.brand.toLowerCase().includes(filters.search.toLowerCase());
+          product?.name?.toLowerCase().includes(filters.search.toLowerCase()) ||
+          product?.brand?.toLowerCase().includes(filters.search.toLowerCase());
 
         const matchPrice =
-          product.price >= filters.priceRange[0] &&
-          product.price <= filters.priceRange[1];
+          product?.price && product?.price >= filters.priceRange[0] &&
+          product?.price && product?.price <= filters.priceRange[1];
 
         const matchType =
           !filters.type ||
-          product.type.toLowerCase() === filters.type.toLowerCase();
+          product?.type?.toLowerCase() === filters.type.toLowerCase();
 
         const matchBrand =
           !filters.brand ||
-          product.brand.toLowerCase() === filters.brand.toLowerCase();
+          product?.brand?.toLowerCase() === filters.brand.toLowerCase();
 
         const matchAvailability = filters.availability
-          ? product.inStock === true
+          ? product?.inStock === true
           : true;
 
         return (
@@ -65,8 +70,8 @@ const AllBicycles = () => {
     : products;
 
   // two arrays for filter
-  const brands = Array.from(new Set(products?.map((p) => p.brand) || []));
-  const types = Array.from(new Set(products?.map((p) => p.type) || []));
+  const brands = Array.from(new Set(filterProducts?.map((p) => p.brand) || []));
+  const types = Array.from(new Set(filterProducts?.map((p) => p.type) || []));
 
   return (
     <div className="w-full">
@@ -119,11 +124,11 @@ const AllBicycles = () => {
         </div>
 
         {/* Filter for large screens */}
-        <div className="hidden lg:block lg:col-span-1">
+        <div className="hidden lg:block lg:col-span-1 !sticky top-20">
           <AllBicycleFilter
             handleChange={handleFilterChange}
-            brandOptions={brands}
-            typeOptions={types}
+            brandOptions={brands as string[]}
+            typeOptions={types as string[]}
           />
         </div>
       </div>
@@ -137,8 +142,8 @@ const AllBicycles = () => {
       >
         <AllBicycleFilter
           handleChange={handleFilterChange}
-          brandOptions={brands}
-          typeOptions={types}
+          brandOptions={brands as string[]}
+          typeOptions={types as string[]}
         />
       </Drawer>
     </div>

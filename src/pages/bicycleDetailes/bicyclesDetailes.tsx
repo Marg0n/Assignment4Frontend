@@ -17,19 +17,19 @@ const BicyclesDetailPage = () => {
   return (
     <div className="mx-auto p-6 font-sans shadow-2xl shadow-purple-600 rounded-4xl">
       {/* Product Image and Details Section */}
-      <Row gutter={24}>
+      <Row gutter={24} className="min-h-[50vh]">
         {/* Left Column: Product Image */}
         <Col xs={24} sm={12} md={8}>
           <Image
             src={productData?.Img}
             alt={productData?.name}
-            className="w-full rounded-xl shadow-lg"
+            className="w-full rounded-xl !min-h-[50vh]"
           />
         </Col>
 
         {/* Right Column: Product Details */}
         <Col xs={24} sm={12} md={16}>
-          <Card bordered={false} className="p-6 shadow-xl rounded-lg">
+          <Card variant="borderless" className="p-6 shadow-xl rounded-lg">
             <Title level={2} className="text-3xl font-semibold">
               {productData?.name}
             </Title>

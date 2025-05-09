@@ -26,6 +26,7 @@ export type TUserFromToken = {
   city?: string;
   state?: string;
   zipCode?: string;
+  isDeleted?: boolean;
 };
 
 //* auth state

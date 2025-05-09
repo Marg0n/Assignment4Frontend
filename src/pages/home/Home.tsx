@@ -3,6 +3,7 @@ import Banner from "../../components/home/Banner";
 import Hero from "../../components/home/Hero";
 import ResponsiveNavbar from "../../components/home/ResponsiveNavbar";
 import FeaturedBicycles from "./FeaturedBicycles";
+import Adv from "@/components/home/Adv";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         <Hero />
         <Banner />
         <FeaturedBicycles />
+        <Adv/>
         <Testimonial/>
       </div>
     </div>
