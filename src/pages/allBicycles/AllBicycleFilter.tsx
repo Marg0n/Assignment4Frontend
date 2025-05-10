@@ -14,7 +14,7 @@ const AllBicycleFilter = ({
   // console.log(brandOptions, typeOptions);
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg w-full">
+    <div className="p-6 bg-white shadow-md rounded-lg w-full sticky top-20">
       <h2 className="text-xl font-semibold mb-4">Filters</h2>
 
       {/* Search Input */}

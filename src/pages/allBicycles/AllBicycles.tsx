@@ -117,14 +117,14 @@ const AllBicycles = () => {
                 total={meta.total}
                 onChange={(p) => setPage(p)}
                 className="mt-6"
-                disabled={(filteredProducts?.length as number) <= 0}
+                disabled={(filterProducts?.length as number) <= 0}
               />
             </div>
           )}
         </div>
 
         {/* Filter for large screens */}
-        <div className="hidden lg:block lg:col-span-1 !sticky top-20">
+        <div className="hidden lg:block lg:col-span-1">
           <AllBicycleFilter
             handleChange={handleFilterChange}
             brandOptions={brands as string[]}
