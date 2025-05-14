@@ -25,7 +25,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       type={type} // the `type` prop here
       disabled={disabled}
       className={clsx(
-        "relative inline-flex items-center justify-center px-8 py-3.5 overflow-hidden font-mono dark:bg-slate-800 tracking-tighter text-black bg-transparent rounded-lg group hover:cursor-pointer  active:scale-95 active:shadow-inner",
+        "relative inline-flex items-center justify-center px-8 py-3.5 overflow-hidden font-mono dark:bg-slate-800 tracking-tighter text-black bg-  rounded-lg group hover:cursor-pointer  active:scale-95 active:shadow-inner",
         className
       )}
       
