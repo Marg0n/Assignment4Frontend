@@ -16,7 +16,7 @@ const NewsletterForm = () => {
   };
 
   return (
-    <section className="p-[20px] w-full min-h-[55vh] rounded-4xl shadow-purple-600 shadow-2xl">
+    <section className="p-[20px] w-full min-h-[55vh] rounded-4xl shadow-purple-300 border-purple-300 shadow-2xl">
       <div className="flex lg:flex-row flex-col items-center justify-between gap-[50px] lg:gap-[20px]">
         <div className="w-full sm:w-[80%] lg:w-[50%]">
           <img

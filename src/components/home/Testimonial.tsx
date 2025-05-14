@@ -35,7 +35,7 @@ const Testimonial = () => {
   ];
 
   return (
-    <div className="w-full h-[85vh] xl:h-[70vh] rounded-4xl! shadow-purple-300 shadow-2xl">
+    <div className="w-full h-[85vh] xl:h-[70vh] rounded-4xl! shadow-purple-300 border-purple-300 shadow-2xl">
       <Carousel
         autoplay
         autoplaySpeed={2000}
