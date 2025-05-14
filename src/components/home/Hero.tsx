@@ -12,7 +12,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="w-full rounded-4xl shadow-purple-600 shadow-2xl flex flex-col justify-center items-center">
+    <div className="w-full rounded-4xl border-purple-300 shadow-purple-300 shadow-2xl flex flex-col justify-center items-center">
       {/* header */}
       <header className="flex h-full lg:flex-row flex-col-reverse gap-4 lg:gap-0 justify-center items-center ">
         <div className="px-8 mt-0  w-full lg:w-[60%] h-full py-4 lg:py-0 lg:h-80">
