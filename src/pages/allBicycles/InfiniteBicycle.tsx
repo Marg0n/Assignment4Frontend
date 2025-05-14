@@ -5,27 +5,57 @@ import { useGetAllProductsQuery } from "@/redux/api/productApi";
 import { setFilter } from "@/redux/features/filterSlice/filterSlice";
 import { RootState } from "@/redux/store";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer, Pagination } from "antd";
-import { useState } from "react";
+import { Button, Drawer } from "antd";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import AllBicycleFilter from "./AllBicycleFilter";
 
-const AllBicycles = () => {
-  const dispatch = useDispatch(); // Redux dispatch function
-  const [page, setPage] = useState(1);
+const InfinityBicycle = () => {
+  const dispatch = useDispatch();
   const [limit] = useState(9);
   const [filterOpen, setFilterOpen] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
 
-  //* for filter
-  const { data: filterData } = useGetAllProductsQuery({ page: 1, limit: 1000 });
-  const filterProducts = filterData?.data?.result;
+  // Infinite scroll state
+  const [items, setItems] = useState<ItemData[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-  //* for pagination
-  const { data, isLoading, isError } = useGetAllProductsQuery({ page, limit });
-  const meta = data?.data?.meta;
-  const products = data?.data?.result;
+  const { data, isFetching, isError } = useGetAllProductsQuery({
+    page: currentPage,
+    limit,
+  });
+
+  useEffect(() => {
+    if (data?.data?.result?.length) {
+      setItems((prev) => [...prev, ...data.data.result]);
+      const totalPages = data.data.meta.totalPage;
+      if (currentPage >= totalPages) setHasMore(false);
+    }
+  }, [data, currentPage]);
+
+  useEffect(() => {
+    if (isError) toast.error("Failed to load products");
+  }, [isError]);
+
+  // Intersection observer for infinite scroll
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastItemRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (isFetching || !hasMore) return;
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setCurrentPage((prev) => prev + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isFetching, hasMore]
+  );
 
   const handleFilterChange = (key: string, value: any) => {
     dispatch(setFilter({ [key]: value }));
@@ -33,30 +63,30 @@ const AllBicycles = () => {
   };
 
   const filters = useSelector((state: RootState) => state.filter);
-  if (isLoading) return <Loading />;
-  if (isError) return toast.error("Failed to load products");
 
+  // Apply filters to `items`
   const filteredProducts = isFilterApplied
-    ? products?.filter((product: ItemData) => {
+    ? items.filter((product: ItemData) => {
         const matchSearch =
           !filters.search ||
-          product?.name?.toLowerCase().includes(filters.search.toLowerCase()) ||
-          product?.brand?.toLowerCase().includes(filters.search.toLowerCase());
+          product.name?.toLowerCase().includes(filters.search.toLowerCase()) ||
+          product.brand?.toLowerCase().includes(filters.search.toLowerCase());
 
         const matchPrice =
-          product?.price && product?.price >= filters.priceRange[0] &&
-          product?.price && product?.price <= filters.priceRange[1];
+          product.price &&
+          product.price >= filters.priceRange[0] &&
+          product.price <= filters.priceRange[1];
 
         const matchType =
           !filters.type ||
-          product?.type?.toLowerCase() === filters.type.toLowerCase();
+          product.type?.toLowerCase() === filters.type.toLowerCase();
 
         const matchBrand =
           !filters.brand ||
-          product?.brand?.toLowerCase() === filters.brand.toLowerCase();
+          product.brand?.toLowerCase() === filters.brand.toLowerCase();
 
         const matchAvailability = filters.availability
-          ? product?.inStock === true
+          ? product.inStock === true
           : true;
 
         return (
@@ -67,11 +97,10 @@ const AllBicycles = () => {
           matchAvailability
         );
       })
-    : products;
+    : items;
 
-  // two arrays for filter
-  const brands = Array.from(new Set(filterProducts?.map((p) => p.brand) || []));
-  const types = Array.from(new Set(filterProducts?.map((p) => p.type) || []));
+  const brands = Array.from(new Set(items.map((p) => p.brand).filter(Boolean)));
+  const types = Array.from(new Set(items.map((p) => p.type).filter(Boolean)));
 
   return (
     <div className="w-full">
@@ -87,19 +116,23 @@ const AllBicycles = () => {
         <div className="lg:col-span-4 col-span-1">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts && filteredProducts.length > 0 ? (
-              filteredProducts.map((product: ItemData) => (
-                <ItemsCard
-                  key={product._id}
-                  data={product}
-                  isPending={isLoading}
-                />
-              ))
+              filteredProducts.map((product: ItemData, index: number) => {
+                const isLast = index === filteredProducts.length - 1;
+                return (
+                  <div
+                    key={product._id}
+                    ref={isLast ? lastItemRef : null}
+                  >
+                    <ItemsCard data={product} isPending={isFetching} />
+                  </div>
+                );
+              })
             ) : (
-              <div className="col-span-full text-center h-[60vh] text-gray-500 mt-10 flex justify-center items-center">
+              <div className="col-span-full text-center h-[60vh] text-gray-500 mt-10 flex justify-center items-center relative">
                 <img
                   src="https://img.freepik.com/free-vector/abstract-empty-concrete-room-with-led-illumination_107791-18444.jpg?semt=ais_hybrid&w=740"
-                  alt="vast emptiness"
-                  className="bg-fit w-full h-full relative"
+                  alt="No items"
+                  className="object-cover w-full h-full"
                 />
                 <p className="absolute text-5xl text-red-600 shadow-2xl">
                   No bicycles found!
@@ -108,23 +141,16 @@ const AllBicycles = () => {
             )}
           </div>
 
-          {/* Pagination */}
-          {meta?.totalPage && meta?.totalPage > 1 && (
-            <div className="mt-6 flex justify-center">
-              <Pagination
-                current={meta.page}
-                pageSize={meta.limit}
-                total={meta.total}
-                onChange={(p) => setPage(p)}
-                className="mt-6"
-                disabled={(filterProducts?.length as number) <= 0}
-              />
+          {/* Loading spinner at the bottom */}
+          {isFetching && hasMore && (
+            <div className="mt-4 text-center">
+              <Loading />
             </div>
           )}
         </div>
 
         {/* Filter for large screens */}
-        <div className="hidden lg:block lg:col-span-1">
+        <div className="hidden lg:block lg:col-span-1 sticky top-20">
           <AllBicycleFilter
             handleChange={handleFilterChange}
             brandOptions={brands as string[]}
@@ -150,4 +176,4 @@ const AllBicycles = () => {
   );
 };
 
-export default AllBicycles;
+export default InfinityBicycle;

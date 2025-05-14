@@ -12,7 +12,8 @@ import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 import { TSidebarItem } from "../../utils/types";
 import { verifyToken } from "../../utils/verifyToken";
 import { toast } from "sonner";
-import { LogoutOutlined } from "@ant-design/icons";
+import { HomeOutlined, LogoutOutlined } from "@ant-design/icons";
+import logo from "../../assets/images/logo/logo.png";
 
 const { Sider } = Layout;
 
@@ -76,7 +77,7 @@ const Sidebar = () => {
       style={{ height: "100vh", position: "sticky", top: "0", left: "0" }}
       className="z-[2]"
     >
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col bg-white">
         <div
           style={{
             color: "white",
@@ -87,15 +88,22 @@ const Sidebar = () => {
           }}
         >
           {/* Logo */}
-          <Link to={"/"} className="font-semibold text-xl">
-            🚲 Bicycle
+          <Link to={"/"} className="font-semibold text-xl flex items-center gap-2">
+            <img 
+              src={logo} 
+              alt="logo" 
+              width={32} 
+              height={32} 
+              className="w-full h-16   bg-transparent"
+            />
+            {/* <span className="text-white">Bicycle</span> */}
           </Link>
         </div>
 
         {/* Menu fills the remaining space */}
         <div className="flex-grow overflow-y-auto">
           <Menu
-            theme="dark"
+            theme="light"
             mode="inline"
             defaultSelectedKeys={["1"]}
             items={sidebarItems}
@@ -103,7 +111,15 @@ const Sidebar = () => {
         </div>
 
         {/* Logout Button at bottom */}
-        <div className="p-4 border-t border-gray-700">
+        <div className="p-4 border-t border-gray-700 flex flex-col gap-2">
+          <Button
+            type="primary"
+            icon={<HomeOutlined />}
+            block
+            onClick={() => window.location.href = "/"}
+          >
+            Home
+          </Button>
           <Button
             type="primary"
             danger

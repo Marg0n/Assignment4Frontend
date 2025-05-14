@@ -51,7 +51,7 @@ const About = () => {
   return (
     <div className="space-y-16 text-justify">
       {/* Static CEO Section */}
-      <div className="w-full min-h-[55vh] rounded-4xl! shadow-purple-600 shadow-2xl">
+      <div className="w-full min-h-[55vh] rounded-4xl! shadow-purple-300 border-purple-300 shadow-2xl">
         <section className="relative rounded-4xl! isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:px-8">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-100),white)] opacity-20"></div>
           <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white ring-1 shadow-xl shadow-indigo-600/10 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
@@ -94,7 +94,7 @@ const About = () => {
       {sections.map((section, index) => (
         <div
           key={index}
-          className="w-full min-h-[55vh] rounded-4xl shadow-purple-600 shadow-2xl"
+          className="w-full min-h-[55vh] rounded-4xl shadow-purple-300 border-purple-300 shadow-2xl"
         >
           <header
             className={`flex h-full flex-col lg:flex-row ${

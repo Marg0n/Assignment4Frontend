@@ -35,13 +35,13 @@ const Testimonial = () => {
   ];
 
   return (
-    <div className="w-full h-[85vh] xl:h-[70vh] rounded-4xl! shadow-purple-600 shadow-2xl">
+    <div className="w-full h-[85vh] xl:h-[70vh] rounded-4xl! shadow-purple-300 border-purple-300 shadow-2xl">
       <Carousel
         autoplay
         autoplaySpeed={2000}
         arrows
         fade
-        className="min-w-full h-[85vh] xl:h-[70vh] bg-gradient-to-r from-blue-400 to-purple-600 rounded-4xl"
+        className="min-w-full h-[85vh] xl:h-[70vh] bg-gradient-to-r from-transparent via-blue-400 to-purple-300 rounded-4xl"
       >
         {testimonials.map((testimonial, index) => (
           <section

@@ -4,6 +4,8 @@ import Hero from "../../components/home/Hero";
 import ResponsiveNavbar from "../../components/home/ResponsiveNavbar";
 import FeaturedBicycles from "./FeaturedBicycles";
 import Adv from "@/components/home/Adv";
+import NewsletterForm from "@/components/home/Newsletter";
+import OurPartners from "./partners/OurPartners";
 
 const Home = () => {
   return (
@@ -14,7 +16,9 @@ const Home = () => {
         <Banner />
         <FeaturedBicycles />
         <Adv/>
+        <NewsletterForm/>
         <Testimonial/>
+        <OurPartners/>
       </div>
     </div>
   );

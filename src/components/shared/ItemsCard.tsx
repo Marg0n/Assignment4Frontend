@@ -107,7 +107,7 @@ const ItemsCard: React.FC<ItemsCardProps> = ({ data, isPending }) => {
         gap="middle"
         align="start"
         vertical
-        className="hover:shadow-blue-600 shadow-2xl hover:scale-105 rounded-2xl"
+        className="hover:shadow-blue-400 shadow-2xl hover:scale-105 rounded-2xl"
       >
         {/* <Switch
           checked={!loading}
