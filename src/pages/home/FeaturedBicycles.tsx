@@ -53,7 +53,7 @@ const FeaturedBicycles = () => {
   //   if (error) return 'An error has occurred: ' + error.message + console.log(error, data)
 
   return (
-    <div className="w-full min-h-[45vh] sm:min-h-[55vh] lg:min-h-[60vh] rounded-4xl shadow-purple-600 shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16">
+    <div className="w-full min-h-[45vh] sm:min-h-[55vh] lg:min-h-[60vh] rounded-4xl border-purple-300 shadow-purple-300 shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16">
       {/* header */}
       <header className="flex h-full flex-col gap-12 lg:gap-0 lg:flex-row justify-center items-center lg:mt-3">
         <div className="px-6 sm:px-8 mt-8 lg:mt-0 w-full lg:w-[50%] space-y-6">
