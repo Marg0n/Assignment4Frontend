@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { Carousel } from "antd";
 
 // import image
+import { ApiResponse } from "@/utils/types";
 import cycle from "../../assets/images/img/bicycle.jpg";
 import { ItemData } from "./ItemsCard";
 import Loading from "./Loading";
-import { ApiResponse } from "@/utils/types";
 
 interface ApiResponseWithIsPending {
   data: ApiResponse;
@@ -25,7 +25,7 @@ const Slider: React.FC<ApiResponseWithIsPending> = ({ data, isPending }) => {
       autoplaySpeed={1500}
       arrows={true}
       fade={true}
-      className="min-w-full min-h-[55vh] bg-gradient-to-r from-blue-400 to-purple-600 rounded-4xl"
+      className="min-w-full min-h-[55vh] bg-gradient-to-br from-blue-100 via-blue-400 to-purple-300 rounded-4xl"
     >
       {data?.result &&
         data?.result.map &&
@@ -47,7 +47,11 @@ const Slider: React.FC<ApiResponseWithIsPending> = ({ data, isPending }) => {
                   <h1 className="text-[40px] lg:text-[60px] leading-[45px] lg:leading-[65px] font-[500]">
                     {d?.name}
                   </h1>
-                  <p className="text-[16px] mt-2">{d?.description?.length as number > 100 ? d?.description?.slice(0, 90) + '...' : d?.description}</p>
+                  <p className="text-[16px] mt-2">
+                    {(d?.description?.length as number) > 100
+                      ? d?.description?.slice(0, 90) + "..."
+                      : d?.description}
+                  </p>
                 </div>
 
                 {/* image */}
