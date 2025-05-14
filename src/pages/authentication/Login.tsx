@@ -146,7 +146,7 @@ const Login = () => {
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl">
           {/* Header Section */}
-          <div className="bg-gradient-to-r from-blue-400 to-purple-600 p-8 text-center flex justify-around items-center">
+          <div className="bg-gradient-to-br from-blue-200 via-blue-400 to-purple-300 p-8 text-center flex justify-around items-center">
             <NavLink to="/">
               {/* <MdDashboard className="h-20px w-20px" /> */}
               {/* logo */}
@@ -228,7 +228,7 @@ const Login = () => {
               <Form.Item>
                 <CustomButton
                   type="submit"
-                  className="w-full !py-2.5 !rounded-lg transition-colors !text-white !font-semibold !text-base"
+                  className="w-full !py-2.5 !rounded-lg transition-colors !text-white text-shadow-white !font-semibold !text-base"
                   textName={
                     isLoading ? (
                       <TbFidgetSpinner className="animate-spin mx-auto" />
