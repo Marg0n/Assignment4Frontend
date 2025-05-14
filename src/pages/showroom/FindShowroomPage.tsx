@@ -13,7 +13,7 @@ const FindShowroomPage: React.FC = () => {
           <MapPin className="w-5 h-5" />
           Visit Us Nearby
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-[#4F46E5] mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent mb-4">
           Find Our Nearest Showroom
         </h1>
         <p className="text-gray-600 text-lg max-w-xl mx-auto">
@@ -23,7 +23,7 @@ const FindShowroomPage: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-400 to-purple-600 text-white py-16 rounded-4xl">
+      <section className="bg-gradient-to-br from-blue-100 via-blue-400 to-purple-300 text-white py-16 rounded-4xl">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
             Find Our Nearest Showroom
@@ -74,7 +74,7 @@ const FindShowroomPage: React.FC = () => {
         {locations.map((location, index) => (
           <div
             key={index}
-            className="bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition"
+            className="bg-white border shadow-purple-300 border-purple-300 p-6 rounded-lg hover:shadow-md transition"
           >
             <h2 className="text-xl font-semibold text-[#4F46E5] mb-1">
               {location.city}
