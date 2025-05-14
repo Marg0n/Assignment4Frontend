@@ -59,7 +59,7 @@ const Slider: React.FC<ApiResponseWithIsPending> = ({ data, isPending }) => {
                   <img
                     src={d?.Img || cycle}
                     alt="image"
-                    className="w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 object-fill rounded-full"
+                    className="w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 object-fill object-center  rounded-full"
                   />
                 </div>
               </header>
