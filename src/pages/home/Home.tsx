@@ -5,6 +5,7 @@ import ResponsiveNavbar from "../../components/home/ResponsiveNavbar";
 import FeaturedBicycles from "./FeaturedBicycles";
 import Adv from "@/components/home/Adv";
 import NewsletterForm from "@/components/home/Newsletter";
+import OurPartners from "./partners/OurPartners";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         <Adv/>
         <NewsletterForm/>
         <Testimonial/>
+        <OurPartners/>
       </div>
     </div>
   );
